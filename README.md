@@ -1,7 +1,12 @@
-# Lab3 - Student Management System (JSP + MySQL)
-
-## Mô tả
-Ứng dụng web quản lý học viên (CRUD), xây dựng bằng Java (Maven, JSP, Servlet), chạy trên Apache Tomcat, kết nối MySQL. Chức năng đăng nhập sử dụng mật khẩu băm SHA-256.
+## Cấu trúc thư mục
+```
+src/main/java/controller/LoginServlet.java   - Xử lý đăng nhập
+src/main/java/util/PasswordUtil.java         - Hàm băm mật khẩu SHA-256
+src/main/webapp/index.jsp                    - Trang danh sách + kết nối DB
+src/main/webapp/update.jsp                   - Sửa thông tin
+src/main/webapp/delete.jsp                   - Xóa thông tin
+setup_schooll.sql                            - Script tạo database mẫu
+```
 
 ## Yêu cầu môi trường
 - NetBeans IDE (có hỗ trợ Java EE / Jakarta EE)
@@ -11,11 +16,7 @@
 
 ## Hướng dẫn cài đặt và chạy
 
-### 1. Clone project
-```bash
-git clone https://github.com/RealSansK/Gi-a-k-3.git
-```
-Mở project bằng NetBeans (File > Open Project).
+### 1. Mở project bằng NetBeans (File > Open Project).
 
 ### 2. Tạo database
 Mở MySQL Workbench (hoặc Command Line Client), đăng nhập bằng user `root`, chạy file `setup_schooll.sql` (đính kèm trong repo) để:
@@ -45,16 +46,6 @@ http://localhost:8090/mavenproject1/
 - Đăng nhập (xác thực bằng mật khẩu băm SHA-256)
 - Xem danh sách học viên (`index.jsp`)
 - Thêm / Sửa (`update.jsp`) / Xóa (`delete.jsp`) học viên
-
-## Cấu trúc thư mục
-```
-src/main/java/controller/LoginServlet.java   - Xử lý đăng nhập
-src/main/java/util/PasswordUtil.java         - Hàm băm mật khẩu SHA-256
-src/main/webapp/index.jsp                    - Trang danh sách + kết nối DB
-src/main/webapp/update.jsp                   - Sửa thông tin
-src/main/webapp/delete.jsp                   - Xóa thông tin
-setup_schooll.sql                            - Script tạo database mẫu
-```
 
 ## Ghi chú
 Nếu gặp lỗi `Access denied for user 'root'@'localhost'`, nguyên nhân là mật khẩu MySQL trong `index.jsp` chưa khớp với mật khẩu thật của máy đang chạy — cần sửa lại theo Bước 3.
