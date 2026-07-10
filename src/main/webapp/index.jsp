@@ -1,6 +1,6 @@
 <%-- 
     Document   : index
-    Created on : Jun 26, 2026, 2:24:03 PM
+    Created on : Jun 26, 2026, 2:24:03 PM
     Author     : Admin
 --%>
 
@@ -10,6 +10,7 @@
         response.sendRedirect("login.jsp");
         return;
     }
+    request.setCharacterEncoding("UTF-8");
 %>
 <%--khai bao ketnoi--%>
 <%@page import="java.sql.*"%>
@@ -23,12 +24,13 @@
     //khai bao ket noi va chuan bi mau syntax de add du lieu vao database
     Connection con;
     PreparedStatement pst;
-    ResultSet rs;
     
     //Tao ket noi va add du lieu vao data base
     Class.forName("com.mysql.jdbc.Driver");
     
-    con=DriverManager.getConnection("jdbc:mysql://localhost/schooll","root","");
+    con=DriverManager.getConnection(
+        "jdbc:mysql://localhost/schooll?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC",
+        "root","");
     pst=con.prepareStatement("insert into records(strname,course,fee)values(?,?,?)");
     pst.setString(1,name);
     pst.setString(2,course);
@@ -36,6 +38,9 @@
     
     //update database
     pst.executeUpdate();
+    
+    pst.close();
+    con.close();
     %>
     <%--Tao thong bao khi add thanh cong--%>
     <script>
@@ -96,7 +101,7 @@
             <div class="col-sm-8">
             <div class="panel-body">
                 <table id="tbl-student" class="table table-responsive table bordered" cellpadding="0" width="100">
-                    <thread>
+                    <thead>
                         <tr>
                             <th>Student Name</th>
                             <th>Course</th>
@@ -104,21 +109,23 @@
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
-                    </thread>
+                    </thead>
+                    <tbody>
                         <%
-                        //khai bao ket noi va chuan bi mau syntax de add du lieu vao database
-                            Connection con;
-                            PreparedStatement pst;
+                        //khai bao ket noi va chuan bi mau syntax de doc du lieu tu database
+                            Connection con2;
                             ResultSet rs;
     
-                            //Tao ket noi va add du lieu vao data base
+                            //Tao ket noi den data base
                             Class.forName("com.mysql.jdbc.Driver");
     
-                            con=DriverManager.getConnection("jdbc:mysql://localhost/schooll","root","");
+                            con2=DriverManager.getConnection(
+                                "jdbc:mysql://localhost/schooll?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC",
+                                "root","");
                         
                         //syntax lay du lieu
                         String query="select * from records";
-                        Statement st=con.createStatement();
+                        Statement st=con2.createStatement();
                         
                         rs=st.executeQuery(query);
                         
@@ -138,7 +145,11 @@
                         </tr>
                         <%
                             }
+                            rs.close();
+                            st.close();
+                            con2.close();
                         %>
+                    </tbody>
                 </table>
             </div>
         </div>
