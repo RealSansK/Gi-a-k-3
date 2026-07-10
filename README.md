@@ -25,7 +25,7 @@ Mở MySQL Workbench (hoặc Command Line Client), đăng nhập bằng user `ro
 - Tạo bảng `records` (dữ liệu học viên: id, name, course, fee)
 
 ### 3. Cấu hình kết nối MySQL
-Mở file `src/main/webapp/index.jsp`, dòng khoảng 108, sửa lại **mật khẩu MySQL đúng với máy đang chạy**:
+Mở file `src/main/webapp/index.jsp` và 'src/main/java/controller/LoginServlet.java ', dòng khoảng 108, sửa lại **mật khẩu MySQL đúng với máy đang chạy**:
 ```java
 con = DriverManager.getConnection("jdbc:mysql://localhost/schooll", "root", "MẬT_KHẨU_CỦA_BẠN");
 ```
