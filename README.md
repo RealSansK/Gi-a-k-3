@@ -22,7 +22,7 @@ setup_schooll.sql                            - Script tạo database mẫu
 Mở MySQL Workbench (hoặc Command Line Client), đăng nhập bằng user `root`, chạy file `setup_schooll.sql` (đính kèm trong repo) để:
 - Tạo database `schooll`
 - Tạo bảng `users` (tài khoản đăng nhập, mật khẩu đã băm SHA-256)
-- Tạo bảng `records` (dữ liệu học viên: id, name, course, fee)
+- Tạo bảng `records` (dữ liệu học viên: id, strname, course, fee)
 
 ### 3. Cấu hình kết nối MySQL
 Mở file `src/main/webapp/index.jsp` và `src/main/java/controller/LoginServlet.java`, dòng khoảng 108, sửa lại **mật khẩu MySQL đúng với máy đang chạy**:
