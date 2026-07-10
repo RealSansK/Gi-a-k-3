@@ -1,32 +1,29 @@
 <%-- 
     Document   : update
-    Created on : Jul 1, 2026, 3:00:31 PM
+    Created on : Jul 1, 2026, 3:00:31 PM
     Author     : Admin
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 <%
+    request.setCharacterEncoding("UTF-8");
     if(request.getParameter("submit")!=null){
         String id=request.getParameter("id");
         String name = request.getParameter("sname");
         String course= request.getParameter("course");
         String fee= request.getParameter("fee");
-
         Connection con;
         PreparedStatement pst;
-        ResultSet rs;
-
         Class.forName("com.mysql.jdbc.Driver");
-        con=DriverManager.getConnection("jdbc:mysql://localhost/schooll?useUnicode=true&characterEncoding=UTF-8","root","");
-
+        con=DriverManager.getConnection("jdbc:mysql://localhost/schooll?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC","root","");
         pst=con.prepareStatement("update records set strname = ?, course = ?, fee = ? where id = ?");
         pst.setString(1, name);
         pst.setString(2, course);
         pst.setString(3, fee);
         pst.setString(4, id);
-
         pst.executeUpdate();
+        pst.close();
+        con.close();
     %>
     <script>
         alert("Update Successful!");
@@ -47,25 +44,21 @@
             <div class="col-sm-4">
                 <form method="post" action="#">
                     <%
-                        Connection con;
-                        PreparedStatement pst;
+                        Connection con2;
+                        PreparedStatement pst2;
                         ResultSet rs;
-
                         Class.forName("com.mysql.jdbc.Driver");
-                        con=DriverManager.getConnection("jdbc:mysql://localhost/schooll?useUnicode=true&characterEncoding=UTF-8","root","");
-                        pst=con.prepareStatement("insert into records(strname,course,fee)values(?,?,?)");
+                        con2=DriverManager.getConnection("jdbc:mysql://localhost/schooll?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC","root","");
                         String id=request.getParameter("id");
-                        pst=con.prepareStatement("select * from records where id = ?");
-                        pst.setString(1,id);
-                        rs=pst.executeQuery();
-
+                        pst2=con2.prepareStatement("select * from records where id = ?");
+                        pst2.setString(1,id);
+                        rs=pst2.executeQuery();
                         while(rs.next()){
                     %>
                     <div align="left">
                         <label class="form-label">Student name</label>
                         <input type="text" class="form-control" placeholder="Student name"
                             value="<%=rs.getString("strname")%>"   name="sname" id="sname" required>
-
                     </div>
                     <div align="left">
                         <label class="form-label">Course</label>
@@ -86,6 +79,9 @@
                     </div>
                     <%
                             }
+                            rs.close();
+                            pst2.close();
+                            con2.close();
                     %>
                     <div align="right">
                         <p><a href="index.jsp">Back home</a></p>
