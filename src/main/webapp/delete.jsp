@@ -4,6 +4,12 @@
     Author     : Admin
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    if (session.getAttribute("username") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
 <%-- khai bao ket noi--%>
 <%@page import="java.sql.*"%>
 <%

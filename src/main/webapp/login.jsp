@@ -8,7 +8,7 @@
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <h1>Login</h1><br>
+        <h1>Login User</h1><br>
         <div class="row">
             <div class="col-sm-4">
                 <form method="post" action="LoginServlet">

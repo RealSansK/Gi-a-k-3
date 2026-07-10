@@ -8,7 +8,7 @@ src/main/webapp/delete.jsp                   - Xóa thông tin
 setup_schooll.sql                            - Script tạo database mẫu
 ```
 
-## Yêu cầu môi trường
+## Yêu cầu môi trường 
 - NetBeans IDE (có hỗ trợ Java EE / Jakarta EE)
 - Apache Tomcat 9.0
 - MySQL Server (đã cài riêng, không dùng XAMPP)

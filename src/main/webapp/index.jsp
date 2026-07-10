@@ -10,7 +10,6 @@
         response.sendRedirect("login.jsp");
         return;
     }
-    request.setCharacterEncoding("UTF-8");
 %>
 <%--khai bao ketnoi--%>
 <%@page import="java.sql.*"%>
@@ -60,7 +59,7 @@
     <body>
         <h1>Student Register Form</h1><br>
         <div align="right">
-        Xin chào, <%= session.getAttribute("username") %> | <a href="logout.jsp">Đăng xuất</a>
+        Welcome, <%= session.getAttribute("username") %> | <a href="logout.jsp">Logout</a>
         </div>
         <div class="row">
             <div class="col-sm-4">

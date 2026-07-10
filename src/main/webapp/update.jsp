@@ -3,6 +3,12 @@
     Created on : Jul 1, 2026, 3:00:31 PM
     Author     : Admin
 --%>
+<%
+    if (session.getAttribute("username") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 <%
