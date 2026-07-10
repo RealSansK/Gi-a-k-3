@@ -2,11 +2,11 @@
 CREATE DATABASE IF NOT EXISTS schooll;
 USE schooll;
 
-CREATE TABLE IF NOT EXISTS records (
+CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    strname VARCHAR(100) NOT NULL,
-    course VARCHAR(100) NOT NULL,
-    fee DECIMAL(10,2) NOT NULL
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,   -- luu SHA-256 hash
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO users (username, password)
@@ -14,7 +14,7 @@ VALUES ('admin', SHA2('123456', 256));
 
 CREATE TABLE IF NOT EXISTS records (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    strname VARCHAR(100) NOT NULL,
     course VARCHAR(100) NOT NULL,
     fee DECIMAL(10,2) NOT NULL
 );
