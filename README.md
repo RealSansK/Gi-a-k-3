@@ -86,3 +86,21 @@ Sau đó **Clean and Build** lại project rồi Run lại.
 
 ### 4. Sau khi sửa code nhưng lỗi vẫn còn
 NetBeans có thể đang chạy bản deploy cũ trên Tomcat. Luôn **Clean and Build** trước, sau đó **Run** lại toàn bộ project để đảm bảo thay đổi được áp dụng.
+
+## 5. Dữ liệu tiếng Việt bị lỗi font khi lưu vào database (hiện ký tự lạ như "DÅ©ng" thay vì "Dũng")
+
+Nguyên nhân: request từ form chưa được set encoding UTF-8 trước khi đọc `getParameter`, nên Tomcat đọc sai byte ngay từ lúc nhận dữ liệu.
+
+**Cách sửa:**
+
+1. Đảm bảo bảng `records` dùng charset `utf8mb4_unicode_ci`:
+
+ALTER TABLE records CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+2. Trong các file `.jsp` có xử lý form (`index.jsp`, `update.jsp`, `delete.jsp`), thêm dòng sau **ngay đầu file, trước khi đọc bất kỳ `request.getParameter(...)` nào**:
+
+request.setCharacterEncoding("UTF-8");
+
+3. Thêm `useUnicode=true&characterEncoding=UTF-8` vào chuỗi kết nối JDBC.
+
+**Lưu ý:** dữ liệu tiếng Việt đã lưu sai từ trước khi sửa sẽ không tự sửa lại được — cần xóa dòng dữ liệu lỗi và nhập lại.
